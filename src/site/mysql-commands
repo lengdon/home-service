@@ -1,0 +1,20 @@
+drop user moranhat@localhost;
+
+flush privileges;
+ 
+CREATE USER 'moranhat'@'localhost' IDENTIFIED BY 'abcd.1234';
+
+GRANT CREATE,ALTER,DELETE,EXECUTE,INSERT,TRIGGER,UPDATE ON homeservice_enduser.* TO 'moranhat'@'localhost';
+GRANT CREATE,ALTER,DELETE,EXECUTE,INSERT,TRIGGER,UPDATE ON homeservice_master.* TO 'moranhat'@'localhost';
+GRANT CREATE,ALTER,DELETE,EXECUTE,INSERT,TRIGGER,UPDATE ON homeservice_provider.* TO 'moranhat'@'localhost';
+
+
+create database homeservice_views;
+CREATE USER 'moran'@'localhost' IDENTIFIED BY 'abcd.1234';
+GRANT SELECT ON homeservice_views.* TO 'moran'@'localhost';
+
+change database homeservice_master;
+create table country as 
+INSERT INTO homeservice_enduser.country values (1, India);
+INSERT INTO homeservice_enduser.country values (2, Nepal);
+
