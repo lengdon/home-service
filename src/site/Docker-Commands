@@ -1,2 +1,20 @@
 1) Run Active MQ:
 docker run -d -p 8161:8161 -p 61616:61616 -p 61613:61613  webcenter/activemq:5.14.3
+
+2) Build Docker image : 
+bash mvnw install dockerfile:build
+
+3) Clean up unused images
+docker rmi $(docker images --filter "dangling=true" -q --no-trunc)
+docker image prune
+docker container prune
+
+3) Run Project container in the host network: 
+docker run --rm -d -p 9090:8080 --name gateway moranhat/home-service-gateway
+#docker run --rm -d --net host --name gateway moranhat/home-service-gateway
+
+4) Log into a running container
+docker exec -it gateway /bin/ash
+
+5) Log into Ubuntu test container
+docker run -it rahulrepo/ubuntu_for_test /bin/bash   //192.168.1.3
